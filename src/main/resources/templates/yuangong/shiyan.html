@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+
+  <style>
+
+    .bg-purple {
+      background: #d3dce6;
+    }
+
+    .bg-purple-light {
+      background: #e5e9f2;
+    }
+
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+
+
+    .bg-purple {
+      background: #d3dce6;
+    }
+
+    .bg-purple-light {
+      background: #e5e9f2;
+    }
+
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+
+  </style>
+</head>
+<body>
+<div id="app">
+  <el-button @click="visible = true">Button</el-button>
+  <el-dialog :visible.sync="visible" title="Hello world">
+    <p>Try Element</p>
+  </el-dialog>
+</div>
+
+<el-row :gutter="10">
+  <el-col :lg="3" :md="4" :sm="6" :xl="1" :xs="8">
+    <div class="grid-content bg-purple">
+
+      <el-row :gutter="20">
+        <el-col :span="5">
+          <div class="grid-content bg-purple" style="background: #f1b0b7"></div>
+        </el-col>
+        <el-col :span="5">
+          <div class="grid-content bg-purple" style="background: #d6d8d9"></div>
+        </el-col>
+        <el-col :span="5">
+          <div class="grid-content bg-purple" style="background: #ba8b00"></div>
+        </el-col>
+        <el-col :span="5">
+          <div class="grid-content bg-purple" style="background: #f1b0b7"></div>
+        </el-col>
+      </el-row>
+
+    </div>
+  </el-col>
+  <el-col :lg="9" :md="8" :sm="6" :xl="11" :xs="4">
+    <div class="grid-content bg-purple-light"></div>
+  </el-col>
+  <el-col :lg="9" :md="8" :sm="6" :xl="11" :xs="4">
+    <div class="grid-content bg-purple"></div>
+  </el-col>
+  <el-col :lg="3" :md="4" :sm="6" :xl="1" :xs="8">
+    <div class="grid-content bg-purple-light"></div>
+  </el-col>
+</el-row>
+
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: function () {
+      return {visible: false}
+    }
+  })
+</script>
+
+</body>
+</html>

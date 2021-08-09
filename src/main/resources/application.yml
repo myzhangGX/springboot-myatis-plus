@@ -1,0 +1,40 @@
+# DataSource Config
+spring:
+  datasource:
+    username: root
+    password: zhang
+    url: jdbc:mysql://localhost:3306/ceshi?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  #邮件发送配置
+  mail:
+    host: smtp.qq.com #发送邮件服务器
+    username: 1972724673@qq.com #qq邮箱
+    password: pdpqgliukcfofbig #客户端授权码
+    protocol: smtp #发送邮件协议
+    properties.mail.smtp.ssl.enable: true #开启SSL
+  #关闭模板引擎
+  thymeleaf:
+    cache: false
+  #图片上传
+  servlet:
+    multipart:
+      enabled: true
+      #单个文件的大小
+      max-file-size: 10MB
+      #总数据的大小
+      max-request-size: 10MB
+
+mybatis-plus:
+  #实体类扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.zhang.pojo
+  # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8085
+
+
+

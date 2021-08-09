@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" th:href="@{layui/css/layui.css}">
+  <link rel="stylesheet" th:href="@{bootstrap-4.6.0-dist/css/bootstrap.css}">
+
+</head>
+<body>
+<div style="width: 99%;  margin-top: 1%;margin-left: 0.5%;">
+  <h1 onclick="ksk()">
+  </h1>
+  <div id="ksl" style="display: none;">
+    <button class="btn btn-primary" onclick="xizhemotaik()" type="button">新增</button>
+    <button class="btn btn-primary" onclick="sklla()" type="button">搜索</button>
+    <button class="btn btn-danger" id="" onclick="fansoun()" type="button">发送</button>
+  </div>
+  <div style="height: 30px">
+
+  </div>
+  <form class="form-horizontal" id="formInserthl" method="post" role="form" row>
+    <div class="form-row">
+      <label class="col-sm-1 col-form-label text-right" style="margin-top: 9px;">姓名：</label>
+      <div class="col-md-3 col-sm-2" style="padding: 0;margin-top: 11px;">
+        <input class="form-control" id="staffnamekl" name="staffname"
+               type="text"/>
+      </div>
+      <label class="col-sm1 col-form-label text-right" style="margin-top: 9px;">性别：</label>
+      <div class="col-md-3 col-sm-2" style="padding: 0;margin-top: 11px;">
+        <input class="form-control" id="sexkl" name="sex"
+               type="text"/>
+      </div>
+      <label class="col-sm-1 col-form-label text-right" style="margin-top: 9px;">年龄：</label>
+      <div class="col-md-3 col-sm-2" style="padding: 0;margin-top: 11px;">
+        <input class="form-control" id="namsdkl" name="namsd"
+               type="text"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="col-sm-1 col-form-label text-right" style="margin-top: 9px;">联系方式：</label>
+      <div class="col-md-3 col-sm-2" style="padding: 0;margin-top: 11px;">
+        <input class="form-control" id="dianhuankl" name="dianhuan"
+               type="text"/>
+      </div>
+      <label class="col-sm-0 col-form-label text-right" style="margin-top: 9px;">地址：</label>
+      <div class="col-md-3 col-sm-2" style="padding: 0;margin-top: 11px;">
+        <input class="form-control" id="dizhikl" name="dizhi"
+               type="text"/>
+      </div>
+    </div>
+  </form>
+
+
+  <table class="Row" id="qinleksks" lay-filter="qinleksks" style="width: 100%"></table>
+</div>
+<!--模态框-->
+<div aria-hidden="true" aria-labelledby="motaikuangks" class="modal fade" id="motaikuangks" role="dialog"
+     tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="motaikuangks">Modal title</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="formInsert" method="post" role="form" row>
+          <div class="form-row">
+            <label class="col-sm-3 col-form-label text-right" style="margin-top: 9px;">姓名：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="staffname" name="staffname"
+                     type="text"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col-sm-3 col-form-label text-right" style="margin-top: 9px;">性别：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="sex" name="sex"
+                     type="text"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col-sm-3 col-form-label text-right" style="margin-top: 9px;">年龄：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="namsd" name="namsd"
+                     type="text"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col-sm-3 col-form-label text-right" style="margin-top: 9px;">联系方式：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="dianhuan" name="dianhuan"
+                     type="text"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col-sm-3 col-form-label text-right" style="margin-top: 9px;">地址：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="dizhi" name="dizhi"
+                     type="text"/>
+            </div>
+          </div>
+          <div style="display: none">
+            <input id="staffid" type="text">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-success mr-3 xinss" onclick="kskla()" style="display: none;"
+                type="button">保存
+        </button>
+        <button class="btn btn-outline-success mr-3 xinsskj" onclick="xiugauan()" style="display: none;"
+                type="button">保存
+        </button>
+        <button class="btn btn-outline-secondary " data-dismiss="modal" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--邮件-->
+<div aria-hidden="true" aria-labelledby="Mailmodalbox" class="modal fade" id="Mailmodalbox" role="dialog"
+     tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Mailmodalbox">Modal title</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="formInsertlk" method="post" role="form" row>
+          <div class="form-row">
+            <label class="col-sm-4 col-form-label " style="margin-top: 9px;">要发送的邮箱：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="youxiang" name="youxiang"
+                     type="text"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col-sm-4 col-form-label " style="margin-top: 9px;">标题：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="biaoti" name="biaoti"
+                     type="text"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col-sm-4 col-form-label " style="margin-top: 9px;">要发送的内容：</label>
+            <div class="col-md-8 col-sm-2" style="padding: 0;margin-top: 11px;">
+              <input class="form-control" id="textf" name="textf"
+                     type="text"/>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-success mr-3 xinss" onclick="ksklalk()" style=""
+                type="button">发
+        </button>
+        <button class="btn btn-outline-secondary " data-dismiss="modal" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{layui/layui.all.js}" type="text/javascript"></script>
+<script th:src="@{js/jquery-3.4.1.min.js}" type="text/javascript"></script>
+<!--<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>-->
+<script th:src="@{bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+<script th:src="@{js/jquery.form.min.js}" type="text/javascript"></script>
+
+<script th:inline="none" type="text/javascript">
+  var qinleksks;
+  var layer;
+  var layuiTable, table;
+
+  $(function () {
+    layui.use(['layer', 'table'], function () {
+      layer = layui.layer;
+      layuiTable = layui.table;//
+      qinleksks = layuiTable.render({
+        elem: '#qinleksks',//html table id
+        url: "/listCustomer",//数据接口
+        cols: [[ //表头
+          {type: 'radio', fixed: 'left', title: '选择', align: 'center', width: 10, hide: true},//单选框列,fixed:'left' 将列固定在左边
+          {type: 'numbers', title: '序号', align: 'center', width: 100},//序号列，title设定标题名称
+          {field: 'staffid', title: 'staffid', sort: false, fixed: 'left', hide: true}
+          , {field: 'staffname', title: '姓名', align: 'center', sort: true}
+          , {field: 'sex', title: '性别', align: 'center'}
+          , {field: 'namsd', title: '年龄', align: 'center'}
+          , {field: 'dianhuan', title: '联系电话', align: 'center'}
+          , {field: 'dizhi', title: '地址', align: 'center'}
+          , {title: '操作', templet: setOperates, align: "center",}
+        ]],
+        page: {
+          limit: 4,//指定每页显示的条数
+          limits: [4, 10, 15],//每页条数的选择项
+        }, //开启分页
+        data: [],
+        toolbar: true,
+        toolbar: "#ksl",
+      });
+      layuiTable.on('row(qinleksks)', function (obj) {
+
+        var data = obj.data;//获取点击行数据
+        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+        obj.tr.find('div.layui-unselect.layui-form-radio')[1].click();
+
+        $("#staffid").val(data.staffid);
+        $("#formInsert")[0].reset();
+      });
+    });
+  })
+
+  /*操作按钮*/
+  function setOperates(data) {
+    var staffid = data.staffid;
+    var btn = "";
+    btn += '<button class="layui-btn layui-btn-xs layui-btn-green" onclick="Editor(' + staffid + ')">修改</button>'
+    btn += '<button class="layui-btn layui-btn-xs layui-btn-danger" onclick="Deletel(' + staffid + ')">删除</button>'
+    return btn;
+  }
+
+
+  //新增数据
+  function xizhemotaik() {
+    $(".xinss").css("display", 'block');
+    $(".xinsskj").css("display", 'none');
+    //重置表单
+
+    $("#formInsert")[0].reset();
+    //弹出新增模态框
+    $("#motaikuangks").modal("show");
+  }
+
+
+  /*新增*/
+  function kskla() {
+    var staffname = $("#staffname").val();
+    var sex = $("#sex").val();
+    var namsd = $("#namsd").val();
+    var dianhuan = $("#dianhuan").val();
+    var dizhi = $("#dizhi").val();
+    $.post("/xiuzhengks", {
+      staffname: staffname,
+      sex: sex,
+      namsd: namsd,
+      dianhuan: dianhuan,
+      dizhi: dizhi
+    }, function (data) {
+      layer.msg(data.msg, {
+        title: '新增提示',
+        icon: data.id
+      });
+      $("#motaikuangks").modal("hide");
+      qinleksks = layuiTable.reload('qinleksks');
+    })
+  }
+
+
+  /*修改回填数据*/
+  function Editor(staffid) {
+    var staffid = staffid;
+    $.post("/yuangongchaxu", {staffid: staffid}, function (data) {
+      if (data != null) {
+        $(".xinss").css("display", 'none');
+        $(".xinsskj").css("display", 'block');
+        $("#formInsert")[0].reset();
+        //弹出新增模态框
+        $("#motaikuangks").modal("show");
+        $("#staffname").val(data.staffname);
+        $("#sex").val(data.sex);
+        $("#namsd").val(data.namsd);
+        $("#dianhuan").val(data.dianhuan);
+        $("#dizhi").val(data.dizhi);
+        $("#staffid").val(data.staffid);
+      }
+    })
+  }
+
+  function xiugauan() {
+    var staffname = $("#staffname").val();
+    var staffid = $("#staffid").val();
+    var sex = $("#sex").val();
+    var namsd = $("#namsd").val();
+    var dianhuan = $("#dianhuan").val();
+    var dizhi = $("#dizhi").val();
+    $.post("/xiuguani", {
+      staffid: staffid,
+      staffname: staffname,
+      sex: sex,
+      namsd: namsd,
+      dianhuan: dianhuan,
+      dizhi: dizhi
+    }, function (data) {
+      layer.msg(data.msg, {
+        title: '修改提示',
+        icon: data.id
+      });
+      $("#motaikuangks").modal("hide");
+      qinleksks = layuiTable.reload('qinleksks');
+    })
+  }
+
+  /*删除*/
+  function Deletel(staffid) {
+    var staffid = staffid;
+    $.post("/shanchu",
+        {staffid: staffid}, function (data) {
+          layer.msg(data.msg, {
+            title: '二级分类删除提示',
+            icon: data.id
+          });
+          qinleksks = layuiTable.reload('qinleksks');
+        })
+  }
+
+  function ksk() {
+    window.location.href = "http://localhost:8085";//id="+ data.id
+  }
+
+  /**
+   *  搜索
+   */
+  function sklla() {
+    var staffname = $("#staffnamekl").val();
+    var sex = $("#sexkl").val();
+    var namsd = $("#namsdkl").val();
+    var dianhuan = $("#dianhuankl").val();
+    var dizhi = $("#dizhikl").val();
+    console.log(sex)
+    qinleksks = layuiTable.reload('qinleksks', {
+      url: '/shuosuochaun',
+      page: {
+        curr: 1,
+      },
+      where: {
+        staffname: staffname,
+        sex: sex,
+        namsd: namsd,
+        dianhuan: dianhuan,
+        dizhi: dizhi
+      }
+    });
+    $("#formInserthl")[0].reset();
+  }
+
+
+  function fansoun() {
+
+    $("#formInsertlk")[0].reset();
+    //弹出新增模态框
+    $("#Mailmodalbox").modal("show");
+  }
+
+
+  function ksklalk() {
+    var youxiang = $("#youxiang").val();
+    var textf = $("#textf").val();
+    var biaoti = $("#biaoti").val();
+    var re = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,3}$/;
+    if (re.test(youxiang)) {
+
+      $.post("/youjiangfasong", {youxiang: youxiang, text: textf, subject: biaoti}, function (data) {
+
+      })
+
+      $("#Mailmodalbox").modal("hide");
+    } else {
+      alert("这不是邮箱");
+    }
+
+
+  }
+
+</script>
+</body>
+</html>
