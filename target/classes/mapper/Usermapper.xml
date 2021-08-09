@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.zhang.mapper.Usermapper">
+  <select id="queryUserList" resultType="User">
+    select *
+    from ceshi.user;
+  </select>
+
+  <!--parameterType数据类型-->
+  <select id="Userquerdernyname" resultType="User" parameterType="String">
+    select *
+    from ceshi.user
+    where username = #{username}
+  </select>
+
+  <select id="queryList" parameterType="com.zhang.pojo.Yuanggong" resultType="Yuanggong">
+    select *
+    from ceshi.yuanggong;
+  </select>
+  <!--回填数据-->
+  <select id="yuangongid" resultType="Yuanggong" parameterType="com.zhang.pojo.Yuanggong">
+    select *
+    from ceshi.yuanggong
+    where staffid = #{staffid}
+  </select>
+
+  <!--新增数据-->
+  <insert id="insert" parameterType="com.zhang.pojo.Yuanggong">
+    insert into yuanggong
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="staffid != null">
+        staffid,
+      </if>
+      <if test="staffname != null">
+        staffname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="namsd != null">
+        namsd,
+      </if>
+      <if test="dianhuan != null">
+        dianhuan,
+      </if>
+      <if test="dizhi != null">
+        dizhi,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="staffid != null">
+        #{staffid,jdbcType=INTEGER},
+      </if>
+      <if test="staffname != null">
+        #{staffname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="namsd != null">
+        #{namsd,jdbcType=VARCHAR},
+      </if>
+      <if test="dianhuan != null">
+        #{dianhuan,jdbcType=VARCHAR},
+      </if>
+      <if test="dizhi != null">
+        #{dizhi,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <!--修改数据-->
+  <update id="update"
+          parameterType="com.zhang.pojo.Yuanggong">
+    update yuanggong
+    <set>
+      <if test="staffid != null">
+        staffid = #{staffid,jdbcType=INTEGER},
+      </if>
+      <if test="staffname != null">
+        staffname = #{staffname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="namsd != null">
+        namsd = #{namsd,jdbcType=VARCHAR},
+      </if>
+      <if test="dianhuan != null">
+        dianhuan = #{dianhuan,jdbcType=VARCHAR},
+      </if>
+      <if test="dizhi != null">
+        dizhi = #{dizhi,jdbcType=VARCHAR},
+      </if>
+
+    </set>
+    where staffid = #{staffid,jdbcType=INTEGER}
+  </update>
+
+  <!--删除-->
+  <delete id="delete" parameterType="com.zhang.pojo.Yuanggong">
+    delete
+    from yuanggong
+    where staffid = #{staffid}
+  </delete>
+  <!--<if test="staffname !=''">-->
+  <select id="Sousuochaxgu" parameterType="java.lang.String"
+          resultType="com.zhang.pojo.Yuanggong">
+    SELECT * FROM yuanggong
+    <where>
+      <if test="staffname !=null">
+        AND yuanggong.staffname LIKE concat('%',#{staffname},'%')
+      </if>
+      <if test="sex !=null">
+        AND yuanggong.sex LIKE concat('%',#{sex},'%')
+      </if>
+      <if test="namsd !=null">
+        AND yuanggong.namsd LIKE concat('%',#{namsd},'%')
+      </if>
+      <if test="dianhuan !=null">
+        AND yuanggong.dianhuan LIKE concat('%',#{dianhuan},'%')
+      </if>
+      <if test="dizhi !=null">
+        AND yuanggong.dizhi LIKE concat('%',#{dizhi},'%')
+      </if>
+    </where>
+  </select>
+</mapper>
